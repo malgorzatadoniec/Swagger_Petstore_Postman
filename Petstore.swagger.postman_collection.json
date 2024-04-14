@@ -1,0 +1,2114 @@
+{
+	"info": {
+		"_postman_id": "b0888076-d33e-4594-b65e-eab1a72da34a",
+		"name": "Petstore.swagger",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33526564"
+	},
+	"item": [
+		{
+			"name": "Pet",
+			"item": [
+				{
+					"name": "Finds_Pets_By_Status",
+					"item": [
+						{
+							"name": "Happy_Paths",
+							"item": [
+								{
+									"name": "Available",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"pm.collectionVariables.set('pet_status', 'available');"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/pet/findByStatus?status={{pet_status}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"pet",
+												"findByStatus"
+											],
+											"query": [
+												{
+													"key": "status",
+													"value": "{{pet_status}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Pending",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"pm.collectionVariables.set('pet_status', 'pending')"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/pet/findByStatus?status={{pet_status}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"pet",
+												"findByStatus"
+											],
+											"query": [
+												{
+													"key": "status",
+													"value": "{{pet_status}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Sold",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"pm.collectionVariables.set('pet_status', 'sold')"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/pet/findByStatus?status={{pet_status}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"pet",
+												"findByStatus"
+											],
+											"query": [
+												{
+													"key": "status",
+													"value": "{{pet_status}}"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"packages": {},
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"packages": {},
+										"exec": [
+											"pm.test('Status code is 200', function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Id is visible in response body', function () {\r",
+											"    pm.response.to.have.property('id');\r",
+											"});\r",
+											"\r",
+											"pm.test('Status is visible in response body', function () {\r",
+											"    pm.response.to.have.property('status');\r",
+											"});\r",
+											"\r",
+											"pm.test('Status is correct', function() { \r",
+											"    let jsonData = pm.response.json() \r",
+											"    _.each(jsonData, (pet) => { pm.expect(pet.status).to.include(pm.collectionVariables.get('pet_status')) }) \r",
+											"    }) \r",
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Sad_Paths",
+							"item": [
+								{
+									"name": "Not_Existing_Status",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test('Response body is empty json', function () {",
+													"    pm.expect(pm.response.json()).to.be.eql([])",
+													"})",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"pm.collectionVariables.set('pet_status', 'waiting');"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/pet/findByStatus?status={{pet_status}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"pet",
+												"findByStatus"
+											],
+											"query": [
+												{
+													"key": "status",
+													"value": "{{pet_status}}"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"packages": {},
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"packages": {},
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									"\r",
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Find_Pet_By_ID",
+					"item": [
+						{
+							"name": "Find_Pet_By_ID_Happy_Path",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('pet_id', 123456757)\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 200', function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Returned pet has correct id', function (){\r",
+											"    pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('pet_id'))\r",
+											"})\r",
+											"\r",
+											"pm.test('Id has intiger value', function () {\r",
+											"    pm.expect(pm.response.json().id).to.be.a('number');\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/pet/{{pet_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"pet",
+										"{{pet_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find_Pet_By_ID_Sad_Path",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('pet_id', 1)\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 404', function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test('Code is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('code')\r",
+											"});\r",
+											"\r",
+											"pm.test('Code has correct value', function () {\r",
+											"    pm.expect(pm.response.json().code).to.equal(1);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has correct value', function () {\r",
+											"    pm.expect(pm.response.json().type).to.equal('error');\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message has correct value', function () {\r",
+											"    pm.expect(pm.response.json().message).to.equal('Pet not found');\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/pet/{{pet_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"pet",
+										"{{pet_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Add_New_Pet",
+					"item": [
+						{
+							"name": "Add_New_Pet_Happy_Path",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('new_pet_id', 5634567)\r",
+											"\r",
+											"pm.collectionVariables.set('pet_name', 'Reks')\r",
+											"\r",
+											"pm.collectionVariables.set('pet_status', 'available')\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 200', function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Id is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('id');\r",
+											"});\r",
+											"\r",
+											"pm.test('Id in response is the same as in request body', function(){\r",
+											"    pm.expect(pm.response.json().id).to.equal(pm.collectionVariables.get(\"new_pet_id\"))\r",
+											"})\r",
+											"\r",
+											"pm.test('Id has intiger value', function () {\r",
+											"    pm.expect(pm.response.json().id).to.be.a('number');\r",
+											"    pm.expect(pm.response.json().id % 1).to.equal(0);\r",
+											"});\r",
+											"\r",
+											"pm.test('Name is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('name');\r",
+											"});\r",
+											"\r",
+											"pm.test('Pet name in response is the same as in request body (in category)', function(){\r",
+											"    pm.expect(pm.response.json().category.name).to.equal(pm.collectionVariables.get(\"pet_name\"))\r",
+											"})\r",
+											"\r",
+											"pm.test('Pet name in response is the same as in request body (in tags)', function(){\r",
+											"    pm.expect(pm.response.json().category.name).to.equal(pm.collectionVariables.get(\"pet_name\"))\r",
+											"})\r",
+											"\r",
+											"pm.test('Status is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('status');\r",
+											"});\r",
+											"\r",
+											"pm.test('Pet status in response is the same as in request body', function(){\r",
+											"    pm.expect(pm.response.json().status).to.equal(pm.collectionVariables.get(\"pet_status\"))\r",
+											"})\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": {{new_pet_id}},\r\n    \"category\": {\r\n        \"id\": 0,\r\n        \"name\": \"{{pet_name}}\"\r\n    },\r\n    \"name\": \"doggie\",\r\n    \"photoUrls\": [\r\n        \"string\"\r\n    ],\r\n    \"tags\": [\r\n        {\r\n            \"id\": {{new_pet_id}},\r\n            \"name\": \"{{pet_name}}\"\r\n        }\r\n    ],\r\n    \"status\": \"{{pet_status}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/pet",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"pet"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add_New_Pet_Sad_Path_400",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('new_pet_id', 'error')\r",
+											"\r",
+											"pm.collectionVariables.set('pet_name', 'Reks')\r",
+											"\r",
+											"pm.collectionVariables.set('pet_status', 'available')"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 400', function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test('Code is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('code')\r",
+											"});\r",
+											"\r",
+											"pm.test('Code has correct value', function () {\r",
+											"    pm.expect(pm.response.json().code).to.equal(400);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has correct value', function () {\r",
+											"    pm.expect(pm.response.json().type).to.equal('unknown');\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message has correct value', function () {\r",
+											"    pm.expect(pm.response.json().message).to.equal('bad input');\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": {{new_pet_id}},\r\n    \"category\": {\r\n        \"id\": 0,\r\n        \"name\": \"{{pet_name}}\"\r\n    },\r\n    \"name\": \"doggie\",\r\n    \"photoUrls\": [\r\n        \"string\"\r\n    ],\r\n    \"tags\": [\r\n        {\r\n            \"id\": {{new_pet_id}},\r\n            \"name\": \"{{pet_name}}\"\r\n        }\r\n    ],\r\n    \"status\": \"{{pet_status}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/pet",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"pet"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add_New_Pet_Sad_Path_405",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('new_pet_id', '1234565432')\r",
+											"\r",
+											"pm.collectionVariables.set('pet_name', 'Reks')\r",
+											"\r",
+											"pm.collectionVariables.set('pet_status', 'available')"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 405', function () {\r",
+											"    pm.response.to.have.status(405);\r",
+											"});\r",
+											"\r",
+											"pm.test('Code is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('code')\r",
+											"});\r",
+											"\r",
+											"pm.test('Code has correct value', function () {\r",
+											"    pm.expect(pm.response.json().code).to.equal(405);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has correct value', function () {\r",
+											"    pm.expect(pm.response.json().type).to.equal('unknown');\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message has correct value', function () {\r",
+											"    pm.expect(pm.response.json().message).to.equal('no data');\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "// {\r\n//     \"id\": {{new_pet_id}},\r\n//     \"category\": {\r\n//         \"id\": 0,\r\n//         \"name\": \"{{pet_name}}\"\r\n//     },\r\n//     \"name\": \"doggie\",\r\n//     \"photoUrls\": [\r\n//         \"string\"\r\n//     ],\r\n//     \"tags\": [\r\n//         {\r\n//             \"id\": {{new_pet_id}},\r\n//             \"name\": \"{{pet_name}}\"\r\n//         }\r\n//     ],\r\n//     \"status\": \"{{pet_status}}\"\r\n// }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/pet",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"pet"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Upload_Image",
+					"item": [
+						{
+							"name": "Upload_Image",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 200', function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has value \"unknown\"', function () {\r",
+											"    pm.expect(pm.response.json().type).to.eql('unknown')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message includes correct text', function () {\r",
+											"    pm.expect(pm.response.json().message).to.include('additionalMetadata', 'File uploaded to')\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('pet_id', 12345675)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "additionalMetadata",
+											"value": "photo",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "w_R2fZ5GT/doggy.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/pet/{{pet_id}}/uploadImage",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"pet",
+										"{{pet_id}}",
+										"uploadImage"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update_Existing_Pet",
+					"item": [
+						{
+							"name": "Update_Existing_Pet",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('pet_id', 12345675)\r",
+											"\r",
+											"pm.collectionVariables.set('pet_name', 'Stefka')\r",
+											"\r",
+											"pm.collectionVariables.set('pet_status', 'sold')"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 200', function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Id is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('id')\r",
+											"})\r",
+											"\r",
+											"pm.test('Id in response is the same as in request body', function(){\r",
+											"    pm.expect(pm.response.json().id).to.equal(pm.collectionVariables.get(\"pet_id\"))\r",
+											"})\r",
+											"\r",
+											"pm.test('Id has intiger value', function () {\r",
+											"    pm.expect(pm.response.json().id).to.be.a('number');\r",
+											"    pm.expect(pm.response.json().id % 1).to.equal(0);\r",
+											"});\r",
+											"\r",
+											"pm.test('Name is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('name')\r",
+											"})\r",
+											"\r",
+											"pm.test('Pet name in response is the same as in request body (in category)', function(){\r",
+											"    pm.expect(pm.response.json().category.name).to.equal(pm.collectionVariables.get(\"pet_name\"))\r",
+											"})\r",
+											"\r",
+											"pm.test('Pet name in response is the same as in request body (in tags)', function(){\r",
+											"    pm.expect(pm.response.json().category.name).to.equal(pm.collectionVariables.get(\"pet_name\"))\r",
+											"})\r",
+											"\r",
+											"pm.test('Status is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('status')\r",
+											"})\r",
+											"\r",
+											"pm.test('Pet status in response is the same as in request body', function(){\r",
+											"    pm.expect(pm.response.json().status).to.equal(pm.collectionVariables.get(\"pet_status\"))\r",
+											"})\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": {{pet_id}},\r\n    \"category\": {\r\n        \"id\": 0,\r\n        \"name\": \"{{pet_name}}\"\r\n    },\r\n    \"name\": \"doggie\",\r\n    \"photoUrls\": [\r\n        \"string\"\r\n    ],\r\n    \"tags\": [\r\n        {\r\n            \"id\": {{pet_id}},\r\n            \"name\": \"{{pet_name}}\"\r\n        }\r\n    ],\r\n    \"status\": \"{{pet_status}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/pet",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"pet"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update_Existing_Pet_Sad_Path_400",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('pet_id', '4y4')\r",
+											"\r",
+											"pm.collectionVariables.set('pet_name', 'Stefka')\r",
+											"\r",
+											"pm.collectionVariables.set('pet_status', 'sold')"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 400', function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test('Code is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('code')\r",
+											"});\r",
+											"\r",
+											"pm.test('Code has correct value', function () {\r",
+											"    pm.expect(pm.response.json().code).to.equal(400);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has correct value', function () {\r",
+											"    pm.expect(pm.response.json().type).to.equal('unknown');\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message has correct value', function () {\r",
+											"    pm.expect(pm.response.json().message).to.equal('bad input');\r",
+											"})\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": {{pet_id}},\r\n    \"category\": {\r\n        \"id\": 0,\r\n        \"name\": \"{{pet_name}}\"\r\n    },\r\n    \"name\": \"doggie\",\r\n    \"photoUrls\": [\r\n        \"string\"\r\n    ],\r\n    \"tags\": [\r\n        {\r\n            \"id\": {{pet_id}},\r\n            \"name\": \"{{pet_name}}\"\r\n        }\r\n    ],\r\n    \"status\": \"{{pet_status}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/pet",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"pet"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update_Existing_Pet_Sad_Path_405",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('pet_id', '4y4')\r",
+											"\r",
+											"pm.collectionVariables.set('pet_name', 'Stefka')\r",
+											"\r",
+											"pm.collectionVariables.set('pet_status', 'sold')"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 405', function () {\r",
+											"    pm.response.to.have.status(405);\r",
+											"});\r",
+											"\r",
+											"pm.test('Code is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('code')\r",
+											"});\r",
+											"\r",
+											"pm.test('Code has correct value', function () {\r",
+											"    pm.expect(pm.response.json().code).to.equal(405);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has correct value', function () {\r",
+											"    pm.expect(pm.response.json().type).to.equal('unknown');\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message has correct value', function () {\r",
+											"    pm.expect(pm.response.json().message).to.equal('no data');\r",
+											"})\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "// {\r\n//     \"id\": {{pet_id}},\r\n//     \"category\": {\r\n//         \"id\": 0,\r\n//         \"name\": \"{{pet_name}}\"\r\n//     },\r\n//     \"name\": \"doggie\",\r\n//     \"photoUrls\": [\r\n//         \"string\"\r\n//     ],\r\n//     \"tags\": [\r\n//         {\r\n//             \"id\": {{pet_id}},\r\n//             \"name\": \"{{pet_name}}\"\r\n//         }\r\n//     ],\r\n//     \"status\": \"{{pet_status}}\"\r\n// }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/pet",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"pet"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete_Pet",
+					"item": [
+						{
+							"name": "Delete_pet_Happy_Path",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('pet_id', 5634567)\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 200', function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has correct value', function () {\r",
+											"    pm.expect(pm.response.json().type).to.equal(\"unknown\");\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message has correct value', function () {\r",
+											"    pm.expect(pm.response.json().message).to.equal.toString(pm.collectionVariables.get('pet_id'));\r",
+											"});\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "special-key",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "api_key",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/pet/{{pet_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"pet",
+										"{{pet_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete_Pet_Sad_Path",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('pet_id', 333)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 404', function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "special-key",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "api_key",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/pet/{{pet_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"pet",
+										"{{pet_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Store",
+			"item": [
+				{
+					"name": "Returns_Pet_Inventories_By_Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Status is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('Status');\r",
+									"});\r",
+									"\r",
+									"pm.test('Status has integre value', function () {\r",
+									"    pm.expect(pm.response.json().Status).to.be.a('number');\r",
+									"    pm.expect(pm.response.json().Status % 1).to.equal(0);\r",
+									"});\r",
+									"\r",
+									"pm.test('Sold is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('sold');\r",
+									"});\r",
+									"\r",
+									"pm.test('Sold has integre value', function () {\r",
+									"    pm.expect(pm.response.json().sold).to.be.a('number');\r",
+									"    pm.expect(pm.response.json().sold % 1).to.equal(0);\r",
+									"});\r",
+									"\r",
+									"pm.test('String is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('string');\r",
+									"});\r",
+									"\r",
+									"pm.test('String has integre value', function () {\r",
+									"    pm.expect(pm.response.json().string).to.be.a('number');\r",
+									"    pm.expect(pm.response.json().string % 1).to.equal(0);\r",
+									"});\r",
+									"\r",
+									"pm.test('Pending is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('pending');\r",
+									"});\r",
+									"\r",
+									"pm.test('Pending has integre value', function () {\r",
+									"    pm.expect(pm.response.json().pending).to.be.a('number');\r",
+									"    pm.expect(pm.response.json().pending % 1).to.equal(0);\r",
+									"});\r",
+									"\r",
+									"pm.test('Available is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('available');\r",
+									"});\r",
+									"\r",
+									"pm.test('Available has integre value', function () {\r",
+									"    pm.expect(pm.response.json().available).to.be.a('number');\r",
+									"    pm.expect(pm.response.json().available % 1).to.equal(0);\r",
+									"});\r",
+									"\r",
+									"pm.test('Not available is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('not available');\r",
+									"});\r",
+									"\r",
+									"pm.test('Ok is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('ok');\r",
+									"});\r",
+									"\r",
+									"pm.test('Ok has integre value', function () {\r",
+									"    pm.expect(pm.response.json().ok).to.be.a('number');\r",
+									"    pm.expect(pm.response.json().ok % 1).to.equal(0);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/store/inventory",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"store",
+								"inventory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find_Purchase_Order_By_ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('order_id', 5)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Id is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('id');\r",
+									"});\r",
+									"\r",
+									"pm.test('Id has correct value', function () {\r",
+									"    pm.expect(pm.response.json().id).to.be.eql(pm.collectionVariables.get('order_id'))\r",
+									"});\r",
+									"\r",
+									"pm.test('Id has integre value', function () {\r",
+									"    pm.expect(pm.response.json().id).to.be.a('number');\r",
+									"    pm.expect(pm.response.json().id % 1).to.equal(0);\r",
+									"});\r",
+									"\r",
+									"pm.test('petId is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('petId');\r",
+									"});\r",
+									"\r",
+									"pm.test('petId value is intiger', function () {\r",
+									"    pm.expect(pm.response.json().petId).to.be.a('number');\r",
+									"    pm.expect(pm.response.json().petId % 1).to.equal(0);\r",
+									"});\r",
+									"\r",
+									"pm.test('Quantity is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('quantity');\r",
+									"});\r",
+									"\r",
+									"pm.test('Quantity value is intiger', function () {\r",
+									"    pm.expect(pm.response.json().petId).to.be.a('number');\r",
+									"    pm.expect(pm.response.json().petId % 1).to.equal(0);\r",
+									"});\r",
+									"\r",
+									"pm.test('Shipdate is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('shipDate');\r",
+									"});\r",
+									"\r",
+									"pm.test('Correct date format', function () {\r",
+									"    pm.expect(pm.response.json().shipDate).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.*$/);\r",
+									"})\r",
+									"\r",
+									"pm.test('Status is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('status');\r",
+									"});\r",
+									"\r",
+									"pm.test('Status has correct value', function () {\r",
+									"    pm.expect(pm.response.json().status).to.be.oneOf(['placed', 'delivered']);\r",
+									"});\r",
+									"\r",
+									"pm.test('Complete is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('complete');\r",
+									"});\r",
+									"\r",
+									"pm.test('Complete has correct value', function () {\r",
+									"     pm.expect(pm.response.json().complete).to.be.oneOf([true, false]);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/store/order/{{order_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"store",
+								"order",
+								"{{order_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Place_An_Order_For_A_Pet",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('new_order_id', 14)\r",
+									"\r",
+									"pm.collectionVariables.set('ordered_pet_id', 123456)\r",
+									"\r",
+									"pm.collectionVariables.set('quantity', 1)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Id is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('id');\r",
+									"});\r",
+									"\r",
+									"pm.test('Id has value equal to new_order_id', function () {\r",
+									"    pm.expect(pm.response.json().id).to.be.a('number')\r",
+									"    pm.expect(pm.response.json().id % 1).to.equal(0);\r",
+									"    pm.expect(pm.response.json().id).to.equal(pm.collectionVariables.get(\"new_order_id\"));\r",
+									"});\r",
+									"\r",
+									"pm.test('PetId is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('petId');\r",
+									"});\r",
+									"\r",
+									"pm.test('PetId has value equal to ordered_pet_id', function () {\r",
+									"    pm.expect(pm.response.json().petId).to.be.a('number')\r",
+									"    pm.expect(pm.response.json().petId % 1).to.equal(0);\r",
+									"    pm.expect(pm.response.json().petId).to.equal(pm.collectionVariables.get(\"ordered_pet_id\"));\r",
+									"});\r",
+									"\r",
+									"pm.test('Quantity is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('quantity');\r",
+									"});\r",
+									"\r",
+									"pm.test('Quantity has value equal to quantity', function () {\r",
+									"    pm.expect(pm.response.json().quantity).to.be.a('number')\r",
+									"    pm.expect(pm.response.json().quantity % 1).to.equal(0);\r",
+									"    pm.expect(pm.response.json().quantity).to.equal(pm.collectionVariables.get(\"quantity\"));\r",
+									"});\r",
+									"\r",
+									"pm.test('Shipdate is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('shipDate');\r",
+									"});\r",
+									"\r",
+									"pm.test('Correct date format', function () {\r",
+									"    pm.expect(pm.response.json().shipDate).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.*$/);\r",
+									"})\r",
+									"\r",
+									"pm.test('Status is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('status');\r",
+									"});\r",
+									"\r",
+									"pm.test('Status has correct value', function () {\r",
+									"    pm.expect(pm.response.json().status).to.be.oneOf(['placed', 'delivered']);\r",
+									"});\r",
+									"\r",
+									"pm.test('Complete is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('complete');\r",
+									"});\r",
+									"\r",
+									"pm.test('Complete has correct value', function () {\r",
+									"     pm.expect(pm.response.json().complete).to.be.oneOf([true, false]);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {{new_order_id}},\r\n    \"petId\": {{ordered_pet_id}},\r\n    \"quantity\": {{quantity}},\r\n    \"shipDate\": \"2024-04-03T05:56:22.074Z\",\r\n    \"status\": \"placed\",\r\n    \"complete\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/store/order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"store",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_Order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Type is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('type')\r",
+									"});\r",
+									"\r",
+									"pm.test('Type has correct value', function () {\r",
+									"    pm.expect(pm.response.json().type).to.equal(\"unknown\");\r",
+									"});\r",
+									"\r",
+									"pm.test('Message is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('message')\r",
+									"});\r",
+									"\r",
+									"pm.test('Message has correct value', function () {\r",
+									"    pm.expect(pm.response.json().message).to.equal.toString(pm.collectionVariables.get('order_id'));\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('order_id', 14)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/store/order/{{order_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"store",
+								"order",
+								"{{order_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Type is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('type')\r",
+									"});\r",
+									"\r",
+									"pm.test('Type has correct value', function () {\r",
+									"    pm.expect(pm.response.json().type).to.equal(\"unknown\");\r",
+									"});\r",
+									"\r",
+									"pm.test('Message is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('message')\r",
+									"});\r",
+									"\r",
+									"pm.test('Message has correct value', function () {\r",
+									"    pm.expect(pm.response.json().message).to.contain('logged in user session:');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('user_name', 'AlaMaKota')\r",
+									"pm.collectionVariables.set('password', 'Kotkot')"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/login?username={{user_name}}&password={{password}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "{{user_name}}"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create_User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('user_id', 2)\r",
+									"pm.collectionVariables.set('user_name', 'JohnDoe')\r",
+									"pm.collectionVariables.set('user_First_Name', 'John')\r",
+									"pm.collectionVariables.set('user_Last_Name', 'Doe')\r",
+									"pm.collectionVariables.set('user_Email', 'johndoe@email.com')\r",
+									"pm.collectionVariables.set('password', 'haslohaslo')\r",
+									"pm.collectionVariables.set('phone', '123456789')"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Type is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('type')\r",
+									"});\r",
+									"\r",
+									"pm.test('Type has correct value', function () {\r",
+									"    pm.expect(pm.response.json().type).to.equal(\"unknown\");\r",
+									"});\r",
+									"\r",
+									"pm.test('Message is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('message')\r",
+									"});\r",
+									"\r",
+									"pm.test('Message has correct value', function () {\r",
+									"    pm.expect(pm.response.json().message).to.equal.toString(pm.collectionVariables.get('user_id'));\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{user_id}},\r\n  \"username\": \"{{user_name}}\",\r\n  \"firstName\": \"{{user_First_Name}}\",\r\n  \"lastName\": \"{{user_Last_Name}}\",\r\n  \"email\": \"{{user_Email}}\",\r\n  \"password\": \"{{password}}\",\r\n  \"phone\": \"{{phone}}\",\r\n  \"userStatus\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create_User_With_List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Type is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('type')\r",
+									"});\r",
+									"\r",
+									"pm.test('Type has correct value', function () {\r",
+									"    pm.expect(pm.response.json().type).to.equal(\"unknown\");\r",
+									"});\r",
+									"\r",
+									"pm.test('Message is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('message')\r",
+									"});\r",
+									"\r",
+									"pm.test('Message has correct value', function () {\r",
+									"    pm.expect(pm.response.json().message).to.equal('ok');\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"id\": 12,\r\n    \"username\": \"AlaMaKota\",\r\n    \"firstName\": \"Ala\",\r\n    \"lastName\": \"Makota\",\r\n    \"email\": \"alamakota@email.com\",\r\n    \"password\": \"Kotkot\",\r\n    \"phone\": \"111222333\",\r\n    \"userStatus\": 0\r\n  },\r\n  {\r\n    \"id\": 13,\r\n    \"username\": \"JackS\",\r\n    \"firstName\": \"Jack\",\r\n    \"lastName\": \"Sparrow\",\r\n    \"email\": \"jacksprw@email.com\",\r\n    \"password\": \"wrobel\",\r\n    \"phone\": \"222333444\",\r\n    \"userStatus\": 0\r\n  },\r\n  {\r\n    \"id\": 14,\r\n    \"username\": \"kaleta\",\r\n    \"firstName\": \"Żaneta\",\r\n    \"lastName\": \"Kaleta\",\r\n    \"email\": \"kaletka@email.com\",\r\n    \"password\": \"lekileki\",\r\n    \"phone\": \"555666777\",\r\n    \"userStatus\": 0\r\n  }\r\n\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/createWithList",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"createWithList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_User_By_User_Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Id is visible in response body', function () {\r",
+									"     pm.expect(pm.response.json()).to.have.property('id');\r",
+									"});\r",
+									"\r",
+									"pm.test('Id has correct value', function () {\r",
+									"    pm.expect(pm.response.json().id).to.be.a('number')\r",
+									"})\r",
+									"\r",
+									"pm.test('Username is visible in response body', function () {\r",
+									"     pm.expect(pm.response.json()).to.have.property('username');\r",
+									"});\r",
+									"\r",
+									"pm.test('Username has correct value', function () {\r",
+									"    pm.expect(pm.response.json().username).to.eq(pm.collectionVariables.get(\"user_name\"))\r",
+									"})\r",
+									"\r",
+									"pm.test('FirstName is visible in response body', function () {\r",
+									"     pm.expect(pm.response.json()).to.have.property('firstName');\r",
+									"});\r",
+									"\r",
+									"pm.test('FirstName value is a string', function () {\r",
+									"    pm.expect(pm.response.json().firstName).to.be.a('string')\r",
+									"})\r",
+									"\r",
+									"pm.test('LastName is visible in response body', function () {\r",
+									"     pm.expect(pm.response.json()).to.have.property('lastName');\r",
+									"});\r",
+									"\r",
+									"pm.test('Lastname value is a string', function () {\r",
+									"    pm.expect(pm.response.json().lastName).to.be.a('string')\r",
+									"})\r",
+									"\r",
+									"pm.test('Email is visible in response body', function () {\r",
+									"     pm.expect(pm.response.json()).to.have.property('email');\r",
+									"});\r",
+									"\r",
+									"pm.test('Email value is a string', function () {\r",
+									"    pm.expect(pm.response.json().email).to.be.a('string')\r",
+									"})\r",
+									"\r",
+									"pm.test('Password is visible in response body', function () {\r",
+									"     pm.expect(pm.response.json()).to.have.property('password');\r",
+									"});\r",
+									"\r",
+									"pm.test('Password value is a string', function () {\r",
+									"    pm.expect(pm.response.json().password).to.be.a('string')\r",
+									"})\r",
+									"\r",
+									"pm.test('Phone is visible in response body', function () {\r",
+									"     pm.expect(pm.response.json()).to.have.property('phone');\r",
+									"});\r",
+									"\r",
+									"pm.test('Phone value is a string', function () {\r",
+									"    pm.expect(pm.response.json().phone).to.be.a('string')\r",
+									"})\r",
+									"\r",
+									"pm.test('UserStatus is visible in response body', function () {\r",
+									"     pm.expect(pm.response.json()).to.have.property('userStatus');\r",
+									"});\r",
+									"\r",
+									"pm.test('UserStatus has correct value', function () {\r",
+									"    pm.expect(pm.response.json().userStatus).to.eq(0)\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('user_name', 'AlaMaKota')"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/{{user_name}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"{{user_name}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update_User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('user_name', 'AlaMaKota')"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Type is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('type')\r",
+									"});\r",
+									"\r",
+									"pm.test('Type has correct value', function () {\r",
+									"    pm.expect(pm.response.json().type).to.equal(\"unknown\");\r",
+									"});\r",
+									"\r",
+									"pm.test('Message is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('message')\r",
+									"});\r",
+									"\r",
+									"pm.test('Message value is string', function () {\r",
+									"    pm.expect(pm.response.json().message).to.be.a('string')\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n      {\r\n    \"id\": 12,\r\n    \"username\": \"AlaMaKota\",\r\n    \"firstName\": \"Ala\",\r\n    \"lastName\": \"Makota\",\r\n    \"email\": \"alamakota123@email.com\",\r\n    \"password\": \"Kotkot123\",\r\n    \"phone\": \"111222333\",\r\n    \"userStatus\": 0\r\n  }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/{{user_name}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"{{user_name}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('user_name', 'JohnDoe')"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Type is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('type')\r",
+									"});\r",
+									"\r",
+									"pm.test('Type has correct value', function () {\r",
+									"    pm.expect(pm.response.json().type).to.equal('unknown');\r",
+									"});\r",
+									"\r",
+									"pm.test('Message is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('message')\r",
+									"});\r",
+									"\r",
+									"pm.test('Message has correct value', function () {\r",
+									"    pm.expect(pm.response.json().message).to.equal(pm.collectionVariables.get('user_name'));\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/{{user_name}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"{{user_name}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Type is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('type')\r",
+									"});\r",
+									"\r",
+									"pm.test('Type has correct value', function () {\r",
+									"    pm.expect(pm.response.json().type).to.equal(\"unknown\");\r",
+									"});\r",
+									"\r",
+									"pm.test('Message is visible in response body', function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('message')\r",
+									"});\r",
+									"\r",
+									"pm.test('Message has correct value', function () {\r",
+									"    pm.expect(pm.response.json().message).to.equal('ok');\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "pet_status",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"key": "base_url",
+			"value": "https://petstore.swagger.io/v2",
+			"type": "string"
+		},
+		{
+			"key": "pet_id",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"key": "new_pet_id",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"key": "pet_name",
+			"value": "any",
+			"type": "string"
+		},
+		{
+			"key": "order_id",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"key": "new_order_id",
+			"value": "0"
+		},
+		{
+			"key": "ordered_pet_id",
+			"value": "0"
+		},
+		{
+			"key": "quantity",
+			"value": "0"
+		},
+		{
+			"key": "user_id",
+			"value": "1"
+		},
+		{
+			"key": "user_name",
+			"value": "Tom123"
+		},
+		{
+			"key": "user_First_Name",
+			"value": "Tom"
+		},
+		{
+			"key": "user_Last_Name",
+			"value": "Jerry"
+		},
+		{
+			"key": "user_Email",
+			"value": "tom.jerry@email.com"
+		},
+		{
+			"key": "password",
+			"value": "Password123"
+		},
+		{
+			"key": "phone",
+			"value": "111111111"
+		}
+	]
+}
