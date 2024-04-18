@@ -1786,429 +1786,887 @@
 			"item": [
 				{
 					"name": "Login",
-					"event": [
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Status code is 200', function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test('Type is visible in response body', function () {\r",
-									"    pm.expect(pm.response.json()).to.have.property('type')\r",
-									"});\r",
-									"\r",
-									"pm.test('Type has correct value', function () {\r",
-									"    pm.expect(pm.response.json().type).to.equal(\"unknown\");\r",
-									"});\r",
-									"\r",
-									"pm.test('Message is visible in response body', function () {\r",
-									"    pm.expect(pm.response.json()).to.have.property('message')\r",
-									"});\r",
-									"\r",
-									"pm.test('Message has correct value', function () {\r",
-									"    pm.expect(pm.response.json().message).to.contain('logged in user session:');\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set('user_name', 'AlaMaKota')\r",
-									"pm.collectionVariables.set('password', 'Kotkot')"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/user/login?username={{user_name}}&password={{password}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"user",
-								"login"
-							],
-							"query": [
+							"name": "Login_Happy_Path",
+							"event": [
 								{
-									"key": "username",
-									"value": "{{user_name}}"
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 200', function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has correct value', function () {\r",
+											"    pm.expect(pm.response.json().type).to.equal(\"unknown\");\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message has correct value', function () {\r",
+											"    pm.expect(pm.response.json().message).to.contain('logged in user session:');\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
 								},
 								{
-									"key": "password",
-									"value": "{{password}}"
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('user_name', 'AlaMaKota')\r",
+											"pm.collectionVariables.set('password', 'Kotkot')"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
 								}
-							]
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/user/login?username={{user_name}}&password={{password}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"login"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{user_name}}"
+										},
+										{
+											"key": "password",
+											"value": "{{password}}"
+										}
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
 					"name": "Create_User",
-					"event": [
+					"item": [
 						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set('user_id', 2)\r",
-									"pm.collectionVariables.set('user_name', 'JohnDoe')\r",
-									"pm.collectionVariables.set('user_First_Name', 'John')\r",
-									"pm.collectionVariables.set('user_Last_Name', 'Doe')\r",
-									"pm.collectionVariables.set('user_Email', 'johndoe@email.com')\r",
-									"pm.collectionVariables.set('password', 'haslohaslo')\r",
-									"pm.collectionVariables.set('phone', '123456789')"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Status code is 200', function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test('Type is visible in response body', function () {\r",
-									"    pm.expect(pm.response.json()).to.have.property('type')\r",
-									"});\r",
-									"\r",
-									"pm.test('Type has correct value', function () {\r",
-									"    pm.expect(pm.response.json().type).to.equal(\"unknown\");\r",
-									"});\r",
-									"\r",
-									"pm.test('Message is visible in response body', function () {\r",
-									"    pm.expect(pm.response.json()).to.have.property('message')\r",
-									"});\r",
-									"\r",
-									"pm.test('Message has correct value', function () {\r",
-									"    pm.expect(pm.response.json().message).to.equal.toString(pm.collectionVariables.get('user_id'));\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"id\": {{user_id}},\r\n  \"username\": \"{{user_name}}\",\r\n  \"firstName\": \"{{user_First_Name}}\",\r\n  \"lastName\": \"{{user_Last_Name}}\",\r\n  \"email\": \"{{user_Email}}\",\r\n  \"password\": \"{{password}}\",\r\n  \"phone\": \"{{phone}}\",\r\n  \"userStatus\": 0\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"name": "Create_User_Happy_Path",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('user_id', 2)\r",
+											"pm.collectionVariables.set('user_name', 'JohnDoe')\r",
+											"pm.collectionVariables.set('user_First_Name', 'John')\r",
+											"pm.collectionVariables.set('user_Last_Name', 'Doe')\r",
+											"pm.collectionVariables.set('user_Email', 'johndoe@email.com')\r",
+											"pm.collectionVariables.set('password', 'haslohaslo')\r",
+											"pm.collectionVariables.set('phone', '123456789')"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 200', function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has correct value', function () {\r",
+											"    pm.expect(pm.response.json().type).to.equal(\"unknown\");\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message has correct value', function () {\r",
+											"    pm.expect(pm.response.json().message).to.equal.toString(pm.collectionVariables.get('user_id'));\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
 								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/user",
-							"host": [
-								"{{base_url}}"
 							],
-							"path": [
-								"user"
-							]
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": {{user_id}},\r\n  \"username\": \"{{user_name}}\",\r\n  \"firstName\": \"{{user_First_Name}}\",\r\n  \"lastName\": \"{{user_Last_Name}}\",\r\n  \"email\": \"{{user_Email}}\",\r\n  \"password\": \"{{password}}\",\r\n  \"phone\": \"{{phone}}\",\r\n  \"userStatus\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create_User_Sad_Path",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('user_id', 2)\r",
+											"pm.collectionVariables.set('user_name', 'JohnDoe')\r",
+											"pm.collectionVariables.set('user_First_Name', 'John')\r",
+											"pm.collectionVariables.set('user_Last_Name', 'Doe')\r",
+											"pm.collectionVariables.set('user_Email', 'johndoe@email.com')\r",
+											"pm.collectionVariables.set('password', 'haslohaslo')\r",
+											"pm.collectionVariables.set('phone', '123456789')"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 405', function () {\r",
+											"    pm.response.to.have.status(405);\r",
+											"});\r",
+											"\r",
+											"pm.test('Code is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('code')\r",
+											"});\r",
+											"\r",
+											"pm.test('Code has correct value', function () {\r",
+											"    pm.expect(pm.response.json().code).to.equal(405);\r",
+											"});\r",
+											"\r",
+											"pm.test('Code has integre value', function () {\r",
+											"    pm.expect(pm.response.json().code).to.be.a('number');\r",
+											"    pm.expect(pm.response.json().code % 1).to.equal(0);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has correct value', function () {\r",
+											"    pm.expect(pm.response.json().type).to.equal('unknown');\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message has correct value', function () {\r",
+											"    pm.expect(pm.response.json().message).to.eql('no data')\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "// {\r\n//   \"id\": {{user_id}},\r\n//   \"username\": \"{{user_name}}\",\r\n//   \"firstName\": \"{{user_First_Name}}\",\r\n//   \"lastName\": \"{{user_Last_Name}}\",\r\n//   \"email\": \"{{user_Email}}\",\r\n//   \"password\": \"{{password}}\",\r\n//   \"phone\": \"{{phone}}\",\r\n//   \"userStatus\": 0\r\n// }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
 					"name": "Create_User_With_List",
-					"event": [
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Status code is 200', function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test('Type is visible in response body', function () {\r",
-									"    pm.expect(pm.response.json()).to.have.property('type')\r",
-									"});\r",
-									"\r",
-									"pm.test('Type has correct value', function () {\r",
-									"    pm.expect(pm.response.json().type).to.equal(\"unknown\");\r",
-									"});\r",
-									"\r",
-									"pm.test('Message is visible in response body', function () {\r",
-									"    pm.expect(pm.response.json()).to.have.property('message')\r",
-									"});\r",
-									"\r",
-									"pm.test('Message has correct value', function () {\r",
-									"    pm.expect(pm.response.json().message).to.equal('ok');\r",
-									"})"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\r\n  {\r\n    \"id\": 12,\r\n    \"username\": \"AlaMaKota\",\r\n    \"firstName\": \"Ala\",\r\n    \"lastName\": \"Makota\",\r\n    \"email\": \"alamakota@email.com\",\r\n    \"password\": \"Kotkot\",\r\n    \"phone\": \"111222333\",\r\n    \"userStatus\": 0\r\n  },\r\n  {\r\n    \"id\": 13,\r\n    \"username\": \"JackS\",\r\n    \"firstName\": \"Jack\",\r\n    \"lastName\": \"Sparrow\",\r\n    \"email\": \"jacksprw@email.com\",\r\n    \"password\": \"wrobel\",\r\n    \"phone\": \"222333444\",\r\n    \"userStatus\": 0\r\n  },\r\n  {\r\n    \"id\": 14,\r\n    \"username\": \"kaleta\",\r\n    \"firstName\": \"Żaneta\",\r\n    \"lastName\": \"Kaleta\",\r\n    \"email\": \"kaletka@email.com\",\r\n    \"password\": \"lekileki\",\r\n    \"phone\": \"555666777\",\r\n    \"userStatus\": 0\r\n  }\r\n\r\n]",
-							"options": {
-								"raw": {
-									"language": "json"
+							"name": "Create_User_With_List_Happy_Path",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 200', function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Code is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('code')\r",
+											"});\r",
+											"\r",
+											"pm.test('Code has correct value', function () {\r",
+											"    pm.expect(pm.response.json().code).to.equal(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has correct value', function () {\r",
+											"    pm.expect(pm.response.json().type).to.equal(\"unknown\");\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message has correct value', function () {\r",
+											"    pm.expect(pm.response.json().message).to.equal('ok');\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
 								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/user/createWithList",
-							"host": [
-								"{{base_url}}"
 							],
-							"path": [
-								"user",
-								"createWithList"
-							]
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n  {\r\n    \"id\": 12,\r\n    \"username\": \"AlaMaKota\",\r\n    \"firstName\": \"Ala\",\r\n    \"lastName\": \"Makota\",\r\n    \"email\": \"alamakota@email.com\",\r\n    \"password\": \"Kotkot\",\r\n    \"phone\": \"111222333\",\r\n    \"userStatus\": 0\r\n  },\r\n  {\r\n    \"id\": 13,\r\n    \"username\": \"JackS\",\r\n    \"firstName\": \"Jack\",\r\n    \"lastName\": \"Sparrow\",\r\n    \"email\": \"jacksprw@email.com\",\r\n    \"password\": \"wrobel\",\r\n    \"phone\": \"222333444\",\r\n    \"userStatus\": 0\r\n  },\r\n  {\r\n    \"id\": 14,\r\n    \"username\": \"kaleta\",\r\n    \"firstName\": \"Żaneta\",\r\n    \"lastName\": \"Kaleta\",\r\n    \"email\": \"kaletka@email.com\",\r\n    \"password\": \"lekileki\",\r\n    \"phone\": \"555666777\",\r\n    \"userStatus\": 0\r\n  }\r\n\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user/createWithList",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"createWithList"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create_User_With_List_Sad_Path",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 405', function () {\r",
+											"    pm.response.to.have.status(405);\r",
+											"});\r",
+											"\r",
+											"pm.test('Code is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('code')\r",
+											"});\r",
+											"\r",
+											"pm.test('Code has correct value', function () {\r",
+											"    pm.expect(pm.response.json().code).to.equal(405);\r",
+											"});\r",
+											"\r",
+											"pm.test('Code has integre value', function () {\r",
+											"    pm.expect(pm.response.json().code).to.be.a('number');\r",
+											"    pm.expect(pm.response.json().code % 1).to.equal(0);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has correct value', function () {\r",
+											"    pm.expect(pm.response.json().type).to.equal('unknown');\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message has correct value', function () {\r",
+											"    pm.expect(pm.response.json().message).to.eql('no data')\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "// [\r\n//   {\r\n//     \"id\": 12,\r\n//     \"username\": \"AlaMaKota\",\r\n//     \"firstName\": \"Ala\",\r\n//     \"lastName\": \"Makota\",\r\n//     \"email\": \"alamakota@email.com\",\r\n//     \"password\": \"Kotkot\",\r\n//     \"phone\": \"111222333\",\r\n//     \"userStatus\": 0\r\n//   },\r\n//   {\r\n//     \"id\": 13,\r\n//     \"username\": \"JackS\",\r\n//     \"firstName\": \"Jack\",\r\n//     \"lastName\": \"Sparrow\",\r\n//     \"email\": \"jacksprw@email.com\",\r\n//     \"password\": \"wrobel\",\r\n//     \"phone\": \"222333444\",\r\n//     \"userStatus\": 0\r\n//   },\r\n//   {\r\n//     \"id\": 14,\r\n//     \"username\": \"kaleta\",\r\n//     \"firstName\": \"Żaneta\",\r\n//     \"lastName\": \"Kaleta\",\r\n//     \"email\": \"kaletka@email.com\",\r\n//     \"password\": \"lekileki\",\r\n//     \"phone\": \"555666777\",\r\n//     \"userStatus\": 0\r\n//   }\r\n\r\n// ]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user/createWithList",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"createWithList"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
 					"name": "Get_User_By_User_Name",
-					"event": [
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Id is visible in response body', function () {\r",
-									"     pm.expect(pm.response.json()).to.have.property('id');\r",
-									"});\r",
-									"\r",
-									"pm.test('Id has correct value', function () {\r",
-									"    pm.expect(pm.response.json().id).to.be.a('number')\r",
-									"})\r",
-									"\r",
-									"pm.test('Username is visible in response body', function () {\r",
-									"     pm.expect(pm.response.json()).to.have.property('username');\r",
-									"});\r",
-									"\r",
-									"pm.test('Username has correct value', function () {\r",
-									"    pm.expect(pm.response.json().username).to.eq(pm.collectionVariables.get(\"user_name\"))\r",
-									"})\r",
-									"\r",
-									"pm.test('FirstName is visible in response body', function () {\r",
-									"     pm.expect(pm.response.json()).to.have.property('firstName');\r",
-									"});\r",
-									"\r",
-									"pm.test('FirstName value is a string', function () {\r",
-									"    pm.expect(pm.response.json().firstName).to.be.a('string')\r",
-									"})\r",
-									"\r",
-									"pm.test('LastName is visible in response body', function () {\r",
-									"     pm.expect(pm.response.json()).to.have.property('lastName');\r",
-									"});\r",
-									"\r",
-									"pm.test('Lastname value is a string', function () {\r",
-									"    pm.expect(pm.response.json().lastName).to.be.a('string')\r",
-									"})\r",
-									"\r",
-									"pm.test('Email is visible in response body', function () {\r",
-									"     pm.expect(pm.response.json()).to.have.property('email');\r",
-									"});\r",
-									"\r",
-									"pm.test('Email value is a string', function () {\r",
-									"    pm.expect(pm.response.json().email).to.be.a('string')\r",
-									"})\r",
-									"\r",
-									"pm.test('Password is visible in response body', function () {\r",
-									"     pm.expect(pm.response.json()).to.have.property('password');\r",
-									"});\r",
-									"\r",
-									"pm.test('Password value is a string', function () {\r",
-									"    pm.expect(pm.response.json().password).to.be.a('string')\r",
-									"})\r",
-									"\r",
-									"pm.test('Phone is visible in response body', function () {\r",
-									"     pm.expect(pm.response.json()).to.have.property('phone');\r",
-									"});\r",
-									"\r",
-									"pm.test('Phone value is a string', function () {\r",
-									"    pm.expect(pm.response.json().phone).to.be.a('string')\r",
-									"})\r",
-									"\r",
-									"pm.test('UserStatus is visible in response body', function () {\r",
-									"     pm.expect(pm.response.json()).to.have.property('userStatus');\r",
-									"});\r",
-									"\r",
-									"pm.test('UserStatus has correct value', function () {\r",
-									"    pm.expect(pm.response.json().userStatus).to.eq(0)\r",
-									"})"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
+							"name": "Get_User_By_User_Name_Happy_Path",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Id is visible in response body', function () {\r",
+											"     pm.expect(pm.response.json()).to.have.property('id');\r",
+											"});\r",
+											"\r",
+											"pm.test('Id has correct value', function () {\r",
+											"    pm.expect(pm.response.json().id).to.be.a('number')\r",
+											"})\r",
+											"\r",
+											"pm.test('Username is visible in response body', function () {\r",
+											"     pm.expect(pm.response.json()).to.have.property('username');\r",
+											"});\r",
+											"\r",
+											"pm.test('Username has correct value', function () {\r",
+											"    pm.expect(pm.response.json().username).to.eq(pm.collectionVariables.get(\"user_name\"))\r",
+											"})\r",
+											"\r",
+											"pm.test('FirstName is visible in response body', function () {\r",
+											"     pm.expect(pm.response.json()).to.have.property('firstName');\r",
+											"});\r",
+											"\r",
+											"pm.test('FirstName value is a string', function () {\r",
+											"    pm.expect(pm.response.json().firstName).to.be.a('string')\r",
+											"})\r",
+											"\r",
+											"pm.test('LastName is visible in response body', function () {\r",
+											"     pm.expect(pm.response.json()).to.have.property('lastName');\r",
+											"});\r",
+											"\r",
+											"pm.test('Lastname value is a string', function () {\r",
+											"    pm.expect(pm.response.json().lastName).to.be.a('string')\r",
+											"})\r",
+											"\r",
+											"pm.test('Email is visible in response body', function () {\r",
+											"     pm.expect(pm.response.json()).to.have.property('email');\r",
+											"});\r",
+											"\r",
+											"pm.test('Email value is a string', function () {\r",
+											"    pm.expect(pm.response.json().email).to.be.a('string')\r",
+											"})\r",
+											"\r",
+											"pm.test('Password is visible in response body', function () {\r",
+											"     pm.expect(pm.response.json()).to.have.property('password');\r",
+											"});\r",
+											"\r",
+											"pm.test('Password value is a string', function () {\r",
+											"    pm.expect(pm.response.json().password).to.be.a('string')\r",
+											"})\r",
+											"\r",
+											"pm.test('Phone is visible in response body', function () {\r",
+											"     pm.expect(pm.response.json()).to.have.property('phone');\r",
+											"});\r",
+											"\r",
+											"pm.test('Phone value is a string', function () {\r",
+											"    pm.expect(pm.response.json().phone).to.be.a('string')\r",
+											"})\r",
+											"\r",
+											"pm.test('UserStatus is visible in response body', function () {\r",
+											"     pm.expect(pm.response.json()).to.have.property('userStatus');\r",
+											"});\r",
+											"\r",
+											"pm.test('UserStatus has correct value', function () {\r",
+											"    pm.expect(pm.response.json().userStatus).to.eq(0)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('user_name', 'AlaMaKota')"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/user/{{user_name}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"{{user_name}}"
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set('user_name', 'AlaMaKota')"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/user/{{user_name}}",
-							"host": [
-								"{{base_url}}"
+							"name": "Get_User_By_User_Name_Sad_Path",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test('Code is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('code')\r",
+											"});\r",
+											"\r",
+											"pm.test('Code has correct value', function () {\r",
+											"    pm.expect(pm.response.json().code).to.eql(1)\r",
+											"});\r",
+											"\r",
+											"pm.test('Code value is intiger', function () {\r",
+											"    pm.expect(pm.response.json().code).to.be.a('number');\r",
+											"    pm.expect(pm.response.json().code % 1).to.equal(0);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has correct value', function () {\r",
+											"    pm.expect(pm.response.json().type).to.eql('error')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message has correct value', function () {\r",
+											"    pm.expect(pm.response.json().message).to.eql('User not found')\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('user_name', 'TinTin')"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
 							],
-							"path": [
-								"user",
-								"{{user_name}}"
-							]
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/user/{{user_name}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"{{user_name}}"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
 					"name": "Update_User",
-					"event": [
+					"item": [
 						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set('user_name', 'AlaMaKota')"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Status code is 200', function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test('Type is visible in response body', function () {\r",
-									"    pm.expect(pm.response.json()).to.have.property('type')\r",
-									"});\r",
-									"\r",
-									"pm.test('Type has correct value', function () {\r",
-									"    pm.expect(pm.response.json().type).to.equal(\"unknown\");\r",
-									"});\r",
-									"\r",
-									"pm.test('Message is visible in response body', function () {\r",
-									"    pm.expect(pm.response.json()).to.have.property('message')\r",
-									"});\r",
-									"\r",
-									"pm.test('Message value is string', function () {\r",
-									"    pm.expect(pm.response.json().message).to.be.a('string')\r",
-									"})\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\r\n      {\r\n    \"id\": 12,\r\n    \"username\": \"AlaMaKota\",\r\n    \"firstName\": \"Ala\",\r\n    \"lastName\": \"Makota\",\r\n    \"email\": \"alamakota123@email.com\",\r\n    \"password\": \"Kotkot123\",\r\n    \"phone\": \"111222333\",\r\n    \"userStatus\": 0\r\n  }\r\n]",
-							"options": {
-								"raw": {
-									"language": "json"
+							"name": "Update_User_Happy_Path",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('user_name', 'AlaMaKota')"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 200', function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has correct value', function () {\r",
+											"    pm.expect(pm.response.json().type).to.equal(\"unknown\");\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message value is string', function () {\r",
+											"    pm.expect(pm.response.json().message).to.be.a('string')\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
 								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/user/{{user_name}}",
-							"host": [
-								"{{base_url}}"
 							],
-							"path": [
-								"user",
-								"{{user_name}}"
-							]
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n      {\r\n    \"id\": 12,\r\n    \"username\": \"AlaMaKota\",\r\n    \"firstName\": \"Ala\",\r\n    \"lastName\": \"Makota\",\r\n    \"email\": \"alamakota123@email.com\",\r\n    \"password\": \"Kotkot123\",\r\n    \"phone\": \"111222333\",\r\n    \"userStatus\": 0\r\n  }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user/{{user_name}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"{{user_name}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update_User Copy_Sad_Path_405",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('user_name', 'AlaMaKota')"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 405', function () {\r",
+											"    pm.response.to.have.status(405);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has correct value', function () {\r",
+											"    pm.expect(pm.response.json().type).to.equal(\"unknown\");\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message value is string', function () {\r",
+											"    pm.expect(pm.response.json().message).to.eql('no data')\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "// [\r\n//       {\r\n//     \"id\": 12,\r\n//     \"username\": \"AlaMaKota\",\r\n//     \"firstName\": \"Ala\",\r\n//     \"lastName\": \"Makota\",\r\n//     \"email\": \"alamakota123@email.com\",\r\n//     \"password\": \"Kotkot123\",\r\n//     \"phone\": \"111222333\",\r\n//     \"userStatus\": 0\r\n//   }\r\n// ]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user/{{user_name}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"{{user_name}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update_User Copy_Sad_Path_404",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('user_name', 'Bleble')"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 404', function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has correct value', function () {\r",
+											"    pm.expect(pm.response.json().type).to.equal(\"unknown\");\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message value is string', function () {\r",
+											"    pm.expect(pm.response.json().message).to.eql('User not found')\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n      {\r\n    \"id\": 12,\r\n    \"username\": \"AlaMaKota\",\r\n    \"firstName\": \"Ala\",\r\n    \"lastName\": \"Makota\",\r\n    \"email\": \"alamakota123@email.com\",\r\n    \"password\": \"Kotkot123\",\r\n    \"phone\": \"111222333\",\r\n    \"userStatus\": 0\r\n  }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user/{{user_name}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"{{user_name}}"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
 					"name": "Delete_User",
-					"event": [
+					"item": [
 						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set('user_name', 'JohnDoe')"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
+							"name": "Delete_User_Happy_Path",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('user_name', 'JohnDoe')"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 200', function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has correct value', function () {\r",
+											"    pm.expect(pm.response.json().type).to.equal('unknown');\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message has correct value', function () {\r",
+											"    pm.expect(pm.response.json().message).to.equal(pm.collectionVariables.get('user_name'));\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/user/{{user_name}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"{{user_name}}"
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Status code is 200', function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test('Type is visible in response body', function () {\r",
-									"    pm.expect(pm.response.json()).to.have.property('type')\r",
-									"});\r",
-									"\r",
-									"pm.test('Type has correct value', function () {\r",
-									"    pm.expect(pm.response.json().type).to.equal('unknown');\r",
-									"});\r",
-									"\r",
-									"pm.test('Message is visible in response body', function () {\r",
-									"    pm.expect(pm.response.json()).to.have.property('message')\r",
-									"});\r",
-									"\r",
-									"pm.test('Message has correct value', function () {\r",
-									"    pm.expect(pm.response.json().message).to.equal(pm.collectionVariables.get('user_name'));\r",
-									"})"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/user/{{user_name}}",
-							"host": [
-								"{{base_url}}"
+							"name": "Delete_User_Sad_Path",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('user_name', 'ase4565sedr56')"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 404', function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test('Type is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('type')\r",
+											"});\r",
+											"\r",
+											"pm.test('Type has correct value', function () {\r",
+											"    pm.expect(pm.response.json().type).to.equal('unknown');\r",
+											"});\r",
+											"\r",
+											"pm.test('Message is visible in response body', function () {\r",
+											"    pm.expect(pm.response.json()).to.have.property('message')\r",
+											"});\r",
+											"\r",
+											"pm.test('Message has correct value', function () {\r",
+											"    pm.expect(pm.response.json().message).to.equal('User not found');\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
 							],
-							"path": [
-								"user",
-								"{{user_name}}"
-							]
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/user/{{user_name}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"{{user_name}}"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
 					"name": "Logout",
